@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class Event(models.models):
+class Event(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     date = models.DateField()
@@ -14,7 +14,7 @@ class Event(models.models):
 
 class Ticket(models.Model):
     event = models.ForeignKey(Event,on_delete=models.CASCADE)
-    ticket_type = models.CharField(max_length=255,choices=('VIP','VIP'))
+    ticket_type = models.CharField(max_length=255)
     price = models.FloatField()
 
 class Booking(models.Model):
@@ -22,5 +22,4 @@ class Booking(models.Model):
     user = models.ForeignKey(User,on_delete=models.CASCADE)
     status = models.CharField(max_length=255,default='Pending')
     total_price = models.FloatField()
-    ticket_type = models.CharField(max_length=255,choices=(('VIP','VIP')))
-    
+    ticket_type = models.CharField(max_length=255)
