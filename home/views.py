@@ -8,6 +8,7 @@ from .serializers import Event, EventSerializer, RegisterSerializer, LoginSerial
 from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
+from .permission import IsAdminUser
 # Create your views here.
 
 class RegisterAPI(APIView):
@@ -63,7 +64,7 @@ class PublicEventViewSet(viewsets.ModelViewSet):
     
 class PrivateEventViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticated]
+    permission_classes = [IsAdminUser]
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 
