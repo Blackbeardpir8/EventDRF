@@ -63,18 +63,8 @@ class LoginAPI(APIView):
 class PublicEventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
-
-    def create(self, request):
-        raise MethodNotAllowed('POST')
+    http_method_names = ['get']
     
-    def update(self, request):  # Handles PUT requests
-        raise MethodNotAllowed('PUT')
-
-    def partial_update(self, request):  # Handles PATCH requests
-        raise MethodNotAllowed('PATCH')
-
-    def destroy(self, request):  # Handles DELETE requests
-        raise MethodNotAllowed('DELETE')
 
 class PrivateEventViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
