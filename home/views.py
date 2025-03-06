@@ -9,6 +9,8 @@ from rest_framework.views import APIView
 from django.contrib.auth import authenticate
 from rest_framework.authtoken.models import Token
 from .permission import IsAdminUser
+from rest_framework.decorators import action
+from rest_framework.exceptions import MethodNotAllowed
 # Create your views here.
 
 class RegisterAPI(APIView):
@@ -61,7 +63,19 @@ class LoginAPI(APIView):
 class PublicEventViewSet(viewsets.ModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
+
+    def create(self, request):
+        raise MethodNotAllowed('POST')
     
+    def update(self, request):  # Handles PUT requests
+        raise MethodNotAllowed('PUT')
+
+    def partial_update(self, request):  # Handles PATCH requests
+        raise MethodNotAllowed('PATCH')
+
+    def destroy(self, request):  # Handles DELETE requests
+        raise MethodNotAllowed('DELETE')
+
 class PrivateEventViewSet(viewsets.ModelViewSet):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAdminUser]
