@@ -4,8 +4,8 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register('private/event',views.PrivateEventViewSet)
-
+router.register('private/event',views.PrivateEventViewSet,basename='private-event')
+router.register('public/event',views.PublicEventViewSet,basename='public-event')
 
 urlpatterns = [
     path('register/',views.RegisterAPI.as_view()),
